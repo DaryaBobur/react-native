@@ -4,8 +4,8 @@ import { StyleSheet, Text, View, ImageBackground, } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-    <ImageBackground style={styles.image} source={require("./assets/sun.jpeg")}>
-        <Text style={styles.text}>Open up App.js to start working on your app!</Text>
+    <ImageBackground style={styles.image} source={require("./assets/Photo.jpg")}>
+        {/* <Text style={styles.text}>Open up App.js to start working on your app!</Text> */}
         <StatusBar style="auto" />
     </ImageBackground>
     
