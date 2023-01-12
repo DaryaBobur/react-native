@@ -12,26 +12,77 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Dimensions,
+  Button,
 } from "react-native";
 
+const initialState = {
+  login: "",
+  email: "",
+  password: "",
+};
+
 export default function RegisterScreen() {
+  console.log(Platform.OS);
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [state, setState] = useState(initialState);
+  const [dimensions, setDimensions] = useState(
+    Dimensions.get("window").width - 10 * 2
+  );
+
+  // useEffect(()=> {
+  //   const onChange = () => {
+  //     const width = Dimensions.get('window').width - 10 * 2;
+  //     setDimensions(width);
+  //   };
+  //   Dimensions.addEventListener('change', onChange);
+  //   return () => {
+  //     Dimensions.removeEventListener('change', onChange);
+  //   }
+  // }, []);
+
   return (
     <View style={styles.container}>
       <ImageBackground
         style={styles.image}
         source={require("../assets/Photo.jpg")}
       >
-        <StatusBar style="auto" />
-        <View style={styles.form}>
-            <Text style={styles.formTitle}>Sign Up</Text>
-          <TextInput style={styles.input} placeholder="Login" />
-          <TextInput style={styles.input} placeholder="Your email" />
-          <TextInput style={styles.input} placeholder="Password" />
-          <TouchableOpacity>
-            <Text style={styles.btn}>Sign Up</Text>
-            <Text style={styles.text}>You have account? Sign in!</Text>
-          </TouchableOpacity>
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.form}
+        >
+          <View
+            style={{ ...styles.form, paddingBottom: isShowKeyboard ? 32 : 78 }}
+          >
+       
+              <Text style={styles.formTitle}>Sign Up</Text>
+              <View>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Login"
+                  onFocus={() => setIsShowKeyboard(true)}
+                />
+              </View>
+              <View>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Your email"
+                  onFocus={() => setIsShowKeyboard(true)}
+                />
+              </View>
+              <View>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Password"
+                  onFocus={() => setIsShowKeyboard(true)}
+                />
+              </View>
+              <TouchableOpacity>
+                <Text style={styles.btn}>Sign Up</Text>
+              </TouchableOpacity>
+              <Text style={styles.text}>You have account? Sign in!</Text>
+            </View>
+
+        </KeyboardAvoidingView>
       </ImageBackground>
     </View>
   );
@@ -46,8 +97,8 @@ const styles = StyleSheet.create({
     color: "#1B4371",
     fontSize: 16,
     lineHeight: 19,
-    textAlign: 'center',
-    marginTop: 16
+    textAlign: "center",
+    marginTop: 16,
   },
   image: {
     flex: 1,
@@ -56,13 +107,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   form: {
-    backgroundColor: "#fff", 
-    width: '100%', 
-    paddingBottom: 45, 
+    backgroundColor: "#fff",
+    width: "100%",
+    // paddingBottom: 32,
     paddingTop: 92,
     borderTopLeftRadius: 25,
-    borderTopRightRadius: 25 
-
+    borderTopRightRadius: 25,
   },
   input: {
     borderWidth: 1,
@@ -73,15 +123,15 @@ const styles = StyleSheet.create({
     color: "#2a2a2a",
     padding: 10,
     marginBottom: 16,
-    backgroundColor:'#F6F6F6',
+    backgroundColor: "#F6F6F6",
   },
   btn: {
-    backgroundColor: '#FF6C00', 
+    backgroundColor: "#FF6C00",
     fontSize: 16,
-    color:'#fff',
-    fontWeight: '700',
+    color: "#fff",
+    fontWeight: "700",
     marginHorizontal: 16,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 25,
     paddingLeft: 32,
     paddingRight: 32,
@@ -90,11 +140,10 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   formTitle: {
-    color: '#212121',
-    fontWeight: '500',
+    color: "#212121",
+    fontWeight: "500",
     fontSize: 30,
-    textAlign: 'center',
-    marginBottom: 32
+    textAlign: "center",
+    marginBottom: 32,
   },
-
 });
