@@ -29,7 +29,7 @@ export default function RegisterScreen() {
           <TextInput style={styles.input} placeholder="Password" />
           <TouchableOpacity>
             <Text style={styles.btn}>Sign Up</Text>
-            <Text>You have account? Sign in!</Text>
+            <Text style={styles.text}>You have account? Sign in!</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -43,8 +43,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#f0e68c",
   },
   text: {
-    color: "#8b0000",
-    fontWeight: "700",
+    color: "#1B4371",
+    fontSize: 16,
+    lineHeight: 19,
+    textAlign: 'center',
+    marginTop: 16
   },
   image: {
     flex: 1,
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff", 
     width: '100%', 
     paddingBottom: 45, 
-    paddingTop: 45,
+    paddingTop: 92,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25 
 
@@ -92,5 +95,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     marginBottom: 32
-  }
+  },
+
 });
