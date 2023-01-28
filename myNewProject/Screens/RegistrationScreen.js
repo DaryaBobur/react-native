@@ -29,16 +29,16 @@ export default function RegisterScreen() {
     Dimensions.get("window").width - 10 * 2
   );
 
-  // useEffect(()=> {
-  //   const onChange = () => {
-  //     const width = Dimensions.get('window').width - 10 * 2;
-  //     setDimensions(width);
-  //   };
-  //   Dimensions.addEventListener('change', onChange);
-  //   return () => {
-  //     Dimensions.removeEventListener('change', onChange);
-  //   }
-  // }, []);
+  useEffect(()=> {
+    const onChange = () => {
+      const width = Dimensions.get('window').width - 10 * 2;
+      setDimensions(width);
+    };
+    Dimensions.addEventListener('change', onChange);
+    return () => {
+      Dimensions.removeEventListener('change', onChange);
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -51,7 +51,7 @@ export default function RegisterScreen() {
           style={styles.form}
         >
           <View
-            style={{ ...styles.form, paddingBottom: isShowKeyboard ? 32 : 78 }}
+            // style={{ ...styles.form, paddingBottom: isShowKeyboard ? 32 : 78 }}
           >
        
               <Text style={styles.formTitle}>Sign Up</Text>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   form: {
     backgroundColor: "#fff",
     width: "100%",
-    // paddingBottom: 32,
+    paddingBottom: 32,
     paddingTop: 92,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
