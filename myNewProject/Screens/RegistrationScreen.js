@@ -51,7 +51,7 @@ export default function RegisterScreen() {
           style={styles.form}
         >
           <View
-            // style={{ ...styles.form, paddingBottom: isShowKeyboard ? 32 : 78 }}
+            style={{ ...styles.form, paddingBottom: isShowKeyboard ? 32 : 78 }}
           >
        
               <Text style={styles.formTitle}>Sign Up</Text>
