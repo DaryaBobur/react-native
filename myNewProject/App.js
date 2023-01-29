@@ -2,6 +2,7 @@ import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import RegistrationScreen from './Screens/RegistrationScreen';
 import { useState } from 'react';
+import LoginScreen from './Screens/LoginScreen';
 
 const loadApplication = async () => {
   await Font.loadAsync({
@@ -26,6 +27,7 @@ export default function App() {
     <>
   
     <RegistrationScreen />
+    {/* <LoginScreen/> */}
     </>
   );
 }
