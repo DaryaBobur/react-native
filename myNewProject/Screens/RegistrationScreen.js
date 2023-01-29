@@ -29,45 +29,50 @@ export default function RegisterScreen() {
     Dimensions.get("window").width - 10 * 2
   );
 
-  useEffect(()=> {
+  useEffect(() => {
     const onChange = () => {
-      const width = Dimensions.get('window').width - 10 * 2;
+      const width = Dimensions.get("window").width - 10 * 2;
       setDimensions(width);
     };
-    Dimensions.addEventListener('change', onChange);
+    Dimensions.addEventListener("change", onChange);
     return () => {
-      Dimensions.removeEventListener('change', onChange);
-    }
+      Dimensions.removeEventListener("change", onChange);
+    };
   }, []);
 
   const keyboardClosed = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    // console.log(state);
+    console.log(state);
     setState(initialState);
   };
 
   return (
     <TouchableWithoutFeedback onPress={keyboardClosed}>
-    <View style={styles.container}>
-      <ImageBackground
-        style={styles.image}
-        source={require("../assets/Photo.jpg")}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.form}
+      <View style={styles.container}>
+        <ImageBackground
+          style={styles.image}
+          source={require("../assets/Photo.jpg")}
         >
-          <View
-            style={{ ...styles.form, paddingBottom: isShowKeyboard ? 32 : 85 }}
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.form}
           >
-       
+            <View
+              style={{
+                ...styles.form,
+                paddingBottom: isShowKeyboard ? 32 : 85,
+                width: dimensions,
+              }}
+            >
               <Text style={styles.formTitle}>Sign Up</Text>
               <View>
                 <TextInput
                   style={styles.input}
                   placeholder="Login"
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.login}
+                  onChangeText={value => setState(prevState => ({...prevState, login: value}))}
                 />
               </View>
               <View>
@@ -75,6 +80,8 @@ export default function RegisterScreen() {
                   style={styles.input}
                   placeholder="Your email"
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
+                  onChangeText={value => setState(prevState => ({...prevState, email: value}))}
                 />
               </View>
               <View>
@@ -82,17 +89,21 @@ export default function RegisterScreen() {
                   style={styles.input}
                   placeholder="Password"
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.password}
+                  onChangeText={value => setState(prevState => ({...prevState, password: value}))}
                 />
               </View>
-              <TouchableOpacity>
+              <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={keyboardClosed}
+              >
                 <Text style={styles.btn}>Sign Up</Text>
               </TouchableOpacity>
               <Text style={styles.text}>You have account? Sign in!</Text>
             </View>
-
-        </KeyboardAvoidingView>
-      </ImageBackground>
-    </View>
+          </KeyboardAvoidingView>
+        </ImageBackground>
+      </View>
     </TouchableWithoutFeedback>
   );
 }
@@ -116,8 +127,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   form: {
-    backgroundColor: "#fff",
     width: "100%",
+    backgroundColor: "#fff",
     paddingBottom: 32,
     paddingTop: 92,
     borderTopLeftRadius: 25,
