@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -12,7 +11,6 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Dimensions,
-  Button,
 } from "react-native";
 
 const initialState = {
@@ -69,6 +67,7 @@ export default function RegisterScreen() {
               <View>
                 <TextInput
                   style={styles.input}
+                  selectionColor={'#FF6C00'}
                   placeholder="Login"
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.login}
@@ -78,6 +77,7 @@ export default function RegisterScreen() {
               <View>
                 <TextInput
                   style={styles.input}
+                  selectionColor={'#FF6C00'}
                   placeholder="Your email"
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
@@ -87,8 +87,10 @@ export default function RegisterScreen() {
               <View>
                 <TextInput
                   style={styles.input}
+                  selectionColor={'#FF6C00'}
                   placeholder="Password"
                   onFocus={() => setIsShowKeyboard(true)}
+                  secureTextEntry={true}
                   value={state.password}
                   onChangeText={value => setState(prevState => ({...prevState, password: value}))}
                 />
