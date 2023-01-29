@@ -40,7 +40,15 @@ export default function RegisterScreen() {
     }
   }, []);
 
+  const keyboardClosed = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    // console.log(state);
+    setState(initialState);
+  };
+
   return (
+    <TouchableWithoutFeedback onPress={keyboardClosed}>
     <View style={styles.container}>
       <ImageBackground
         style={styles.image}
@@ -51,7 +59,7 @@ export default function RegisterScreen() {
           style={styles.form}
         >
           <View
-            style={{ ...styles.form, paddingBottom: isShowKeyboard ? 32 : 78 }}
+            style={{ ...styles.form, paddingBottom: isShowKeyboard ? 32 : 85 }}
           >
        
               <Text style={styles.formTitle}>Sign Up</Text>
@@ -85,6 +93,7 @@ export default function RegisterScreen() {
         </KeyboardAvoidingView>
       </ImageBackground>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
