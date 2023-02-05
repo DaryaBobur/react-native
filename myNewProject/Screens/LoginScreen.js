@@ -59,7 +59,7 @@ export default function LoginScreen() {
             <View
               style={{
                 ...styles.form,
-                paddingBottom: isShowKeyboard ? 32 : 144,
+                marginBottom: isShowKeyboard ? 32 : 144,
                 width: dimensions,
               }}
             >
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
   form: {
     width: "100%",
     backgroundColor: "#fff",
-    paddingBottom: 32,
     paddingTop: 32,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
