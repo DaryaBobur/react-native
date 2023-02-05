@@ -59,7 +59,7 @@ export default function RegisterScreen() {
             <View
               style={{
                 ...styles.form,
-                paddingBottom: isShowKeyboard ? 32 : 85,
+                marginBottom: isShowKeyboard ? 32 : 85,
                 width: dimensions,
               }}
             >
@@ -125,13 +125,13 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "flex-end",
   },
   form: {
     width: "100%",
     backgroundColor: "#fff",
-    paddingBottom: 32,
+    // paddingBottom: 32,
     paddingTop: 92,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
