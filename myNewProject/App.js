@@ -1,10 +1,12 @@
+import React, {useState} from "react";
+import {} from "react-native";
 import * as Font from 'expo-font';
-import {AppLoading} from 'expo';
+// import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading'
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import {RegistrationScreen} from './Screens/RegistrationScreen';
-import { useState } from 'react';
-import {LoginScreen} from './Screens/LoginScreen';
+import RegistrationScreen from './Screens/RegistrationScreen';
+import LoginScreen from './Screens/LoginScreen';
 
 const loadApplication = async () => {
   await Font.loadAsync({
