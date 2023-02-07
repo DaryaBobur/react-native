@@ -1,5 +1,7 @@
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import RegistrationScreen from './Screens/RegistrationScreen';
 import { useState } from 'react';
 import LoginScreen from './Screens/LoginScreen';
@@ -26,8 +28,8 @@ export default function App() {
   
     <>
   
-    <RegistrationScreen />
-    {/* <LoginScreen/> */}
+    {/* <RegistrationScreen /> */}
+    <LoginScreen/>
     </>
   );
 }
