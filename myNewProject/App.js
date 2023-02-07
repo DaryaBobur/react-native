@@ -2,9 +2,9 @@ import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import RegistrationScreen from './Screens/RegistrationScreen';
+import {RegistrationScreen} from './Screens/RegistrationScreen';
 import { useState } from 'react';
-import LoginScreen from './Screens/LoginScreen';
+import {LoginScreen} from './Screens/LoginScreen';
 
 const loadApplication = async () => {
   await Font.loadAsync({
@@ -13,25 +13,25 @@ const loadApplication = async () => {
     "Roboto-Medium": require('./assets/fonts/Roboto-Medium.ttf')
   })
 }
+
+const AuthStack = createStackNavigator();
 export default function App() {
-  // const [isReady, setIsReady] = useState(false);
-  // if(!isReady) {
-  //   return (
-  //     <AppLoading 
-  //     startAsync={loadApplication}
-  //     onFinish={()=> setIsReady(true)}
-  //     onError={console.error}
-  //     />
-  //   )
-  // }
+  const [isReady, setIsReady] = useState(false);
+  if(!isReady) {
+    return (
+      <AppLoading 
+      startAsync={loadApplication}
+      onFinish={()=> setIsReady(true)}
+      onError={console.error}
+      />
+    )
+  }
   return (
-  
-    <>
-  
-    {/* <RegistrationScreen /> */}
-    <LoginScreen/>
-    </>
+    <NavigationContainer>
+      <AuthStack.Navigator>
+        <AuthStack.Screen name="Register" component={RegistrationScreen} />
+        <AuthStack.Screen name="Login" component={LoginScreen} />
+      </AuthStack.Navigator>
+    </NavigationContainer>
   );
 }
-
-
