@@ -41,7 +41,7 @@ const appRoute = (isAuth) => {
         options={{
           headerTitleAlign: "center",
           tabBarIcon: ({ focused, size, color }) => (
-            <MaterialCommunityIcons name="dots-grid" size={24} color="black" />
+            <MaterialCommunityIcons name="dots-grid" size={24} color={color} />
           ),
         }}
         name="Posts"
@@ -51,7 +51,7 @@ const appRoute = (isAuth) => {
         options={{
           headerTitleAlign: "center",
           tabBarIcon: ({ focused, size, color }) => (
-            <Ionicons name="add" size={24} color="black" />
+            <Ionicons name="add" size={24} color={color} />
           ),
         }}
         name="Create"
@@ -61,7 +61,7 @@ const appRoute = (isAuth) => {
         options={{
           headerTitleAlign: "center",
           tabBarIcon: ({ focused, size, color }) => (
-            <Feather name="user" size={24} color="black" />
+            <Feather name="user" size={24} color={color} />
           ),
         }}
         name="Profile"
