@@ -19,7 +19,7 @@ const initialState = {
   password: "",
 };
 
-export default function RegisterScreen() {
+export default function RegisterScreen({navigation}) {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
@@ -101,7 +101,9 @@ export default function RegisterScreen() {
               >
                 <Text style={styles.btn}>Sign Up</Text>
               </TouchableOpacity>
+              <TouchableOpacity onPress={()=> navigation.navigate('Login')}>
               <Text style={styles.text}>You have account? Sign in!</Text>
+              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -125,13 +127,11 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    // alignItems: "center",
     justifyContent: "flex-end",
   },
   form: {
     width: "100%",
     backgroundColor: "#fff",
-    // paddingBottom: 32,
     paddingTop: 92,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
