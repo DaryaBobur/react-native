@@ -87,7 +87,7 @@ export default function LoginScreen({navigation}) {
               activeOpacity={0.8}
               onPress={keyboardClosed}
               >
-                <Text style={styles.btn}>Log In</Text>
+                <Text style={styles.btn} onPress={() => navigation.navigate("Post")}>Log In</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={()=> navigation.navigate('Register')}>
               <Text style={styles.text}>Don't have an account? Sign up!</Text>
