@@ -32,6 +32,13 @@ const appRoute = (isAuth) => {
           name="Login"
           component={LoginScreen}
         />
+             <AuthStack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Post"
+          component={PostsScreen}
+        />
       </AuthStack.Navigator>
     );
   }
