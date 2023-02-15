@@ -99,7 +99,7 @@ export default function RegisterScreen({navigation}) {
               activeOpacity={0.8}
               onPress={keyboardClosed}
               >
-                <Text style={styles.btn}>Sign Up</Text>
+                <Text style={styles.btn} onPress={() => navigation.navigate("Post")}>Sign Up</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={()=> navigation.navigate('Login')}>
               <Text style={styles.text}>You have account? Sign in!</Text>
