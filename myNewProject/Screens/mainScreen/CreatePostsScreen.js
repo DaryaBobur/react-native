@@ -7,7 +7,7 @@ const CreatePostsScreen = () => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
 
-  const takePhoto = async() => {
+  const makePhoto = async() => {
     const photo = await camera.takePictureAsync();
     setPhoto(photo.uri);
     console.log('photo', photo);
@@ -15,7 +15,7 @@ const CreatePostsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} ref={setCamera}>
+    <Camera style={styles.camera} ref={setCamera}>
         {
           photo && (
             <View style={styles.photoContainer}>
@@ -25,9 +25,8 @@ const CreatePostsScreen = () => {
               />
               
             </View>
-          )
-        }
-        <TouchableOpacity onPress={takePhoto} style={styles.snapContainer}>
+          )} 
+        <TouchableOpacity onPress={makePhoto} style={styles.snapContainer}>
           <Text style={styles.snap}>SNAP</Text>
         </TouchableOpacity>
       </Camera>
@@ -39,9 +38,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   camera: {
-    height: 300,
+    height: 350,
     // marginBottom: 32,
-    flex: 1,
+    // flex: 1,
     alignItems: "center",
     justifyContent: "flex-end",
   },
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
   photoContainer:{
     position: 'absolute',
     top: 50,
-    left: 20,
+    left: 100,
     borderColor: 'red',
     borderWidth: 1,
   }
