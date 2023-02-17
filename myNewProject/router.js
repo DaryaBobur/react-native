@@ -36,7 +36,7 @@ const appRoute = (isAuth) => {
           options={{
             headerShown: false,
           }}
-          name="Post"
+          name="Posts"
           component={PostsScreen}
         />
       </AuthStack.Navigator>
