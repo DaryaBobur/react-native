@@ -63,7 +63,7 @@ const CreatePostsScreen = ({ navigation }) => {
 
       <View>
         <TouchableOpacity style={styles.deleteBtn}>
-          <AntDesign name="delete" size={24} color="#BDBDBD" />
+          <AntDesign name="delete" size={24} color="#DADADA" />
         </TouchableOpacity>
       </View>
     </View>
