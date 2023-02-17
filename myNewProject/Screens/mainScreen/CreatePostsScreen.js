@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput  } from "react-native";
 import { Camera } from "expo-camera";
-// import { TextInput } from "react-native-gesture-handler";
 
 const CreatePostsScreen = ({navigation}) => {
   const [camera, setCamera] = useState(null);
