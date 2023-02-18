@@ -7,13 +7,12 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+
 import { Camera } from "expo-camera";
-import { SimpleLineIcons } from "@expo/vector-icons";
-{
-  /* <SimpleLineIcons name="camera" size={24} color="black" /> */
-}
+import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
+
 const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
@@ -38,7 +37,7 @@ const CreatePostsScreen = ({ navigation }) => {
           </View>
         )}
         <TouchableOpacity onPress={makePhoto} style={styles.snapContainer}>
-          <Text style={styles.snap}>SNAP</Text>
+          <FontAwesome name="camera" size={20} color="#BDBDBD" />
         </TouchableOpacity>
       </Camera>
       <View style={styles.textContainer}>
@@ -88,17 +87,18 @@ const styles = StyleSheet.create({
   snapContainer: {
     borderRadius: 50,
     borderWidth: 1,
-    borderColor: "#FF6C00",
-    marginBottom: 20,
-    width: 50,
-    height: 50,
+    borderColor: "transparent",
+    marginBottom: 80,
+    width: 60,
+    height: 60,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#fff",
   },
   photoContainer: {
     position: "absolute",
-    top: 50,
-    left: 100,
+    top: 20,
+    left: 90,
     borderColor: "#FF6C00",
     borderWidth: 1,
     borderRadius: 20,
@@ -156,4 +156,5 @@ const styles = StyleSheet.create({
     marginVertical: 32,
   },
 });
+
 export default CreatePostsScreen;
