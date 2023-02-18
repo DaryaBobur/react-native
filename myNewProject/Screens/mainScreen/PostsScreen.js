@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 
 const PostsScreen = ({ route }) => {
   const [posts, setPosts] = useState([]);
-  // console.log(route.params)
 
   useEffect(() => {
     if (route.params) {
