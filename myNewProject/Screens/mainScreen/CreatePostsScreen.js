@@ -51,7 +51,7 @@ const CreatePostsScreen = ({ navigation }) => {
       <View>
         <TextInput style={styles.input} placeholder="Description..." />
       </View>
-      <View style={{}}>
+      <View>
         <TextInput style={styles.input} placeholder="  Location..." />
         <EvilIcons
           name="location"
