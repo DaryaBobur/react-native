@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-// import {} from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 
 import { NavigationContainer } from "@react-navigation/native";
 
-
 import appRoute from "./router";
-
 
 const loadFonts = async () => {
   await Font.loadAsync({
@@ -19,7 +16,7 @@ const loadFonts = async () => {
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
-  const routing = appRoute({})
+  const routing = appRoute({});
   if (!isReady) {
     return (
       <AppLoading
@@ -29,9 +26,5 @@ export default function App() {
       />
     );
   }
-  return (
-    <NavigationContainer>
-{routing}
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{routing}</NavigationContainer>;
 }
