@@ -9,6 +9,8 @@ import {
 } from "react-native";
 
 import { Camera } from "expo-camera";
+import * as Location from 'expo-location';
+
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
@@ -19,6 +21,9 @@ const CreatePostsScreen = ({ navigation }) => {
 
   const makePhoto = async () => {
     const photo = await camera.takePictureAsync();
+    const location = await Location.getCurrentPositionAsync();
+    console.log("latitude", location.coords.latitude)
+    console.log("longitude", location.coords.longitude)
     setPhoto(photo.uri);
     console.log("photo", photo);
   };
