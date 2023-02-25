@@ -21,6 +21,11 @@ const CreatePostsScreen = ({ navigation }) => {
 
   const makePhoto = async () => {
     const photo = await camera.takePictureAsync();
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setErrorMsg('Permission to access location was denied');
+      return;
+    }
     const location = await Location.getCurrentPositionAsync();
     console.log("latitude", location.coords.latitude)
     console.log("longitude", location.coords.longitude)
