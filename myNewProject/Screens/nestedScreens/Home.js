@@ -5,21 +5,20 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  Button,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 
 const Home = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
-
+console.log(route.params)
   useEffect(() => {
     if (route.params) {
       setPosts((prevState) => [...prevState, route.params]);
     }
   }, [route.params]);
 
-  console.log(posts);
+  console.log("posts", posts);
 
   return (
     <View style={styles.container}>
