@@ -26,7 +26,7 @@ const CreatePostsScreen = ({ navigation }) => {
     })();
   }, []);
 
-  const makePhoto = async () => {
+  const takePhoto = async () => {
     const photo = await camera.takePictureAsync();
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
@@ -53,7 +53,7 @@ const CreatePostsScreen = ({ navigation }) => {
             <Image source={{ uri: photo }} style={styles.photo} />
           </View>
         )}
-        <TouchableOpacity onPress={makePhoto} style={styles.snapContainer}>
+        <TouchableOpacity onPress={takePhoto} style={styles.snapContainer}>
           <FontAwesome name="camera" size={20} color="#BDBDBD" />
         </TouchableOpacity>
       </Camera>
