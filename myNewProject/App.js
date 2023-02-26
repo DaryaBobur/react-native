@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
-
+import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
-
 import appRoute from "./router";
-
+import { store } from "./redux/store";
 const loadFonts = async () => {
   await Font.loadAsync({
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
@@ -26,5 +25,9 @@ export default function App() {
       />
     );
   }
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  return (
+    <Provider store={store}>
+      <NavigationContainer>{routing}</NavigationContainer>
+    </Provider>
+  );
 }
