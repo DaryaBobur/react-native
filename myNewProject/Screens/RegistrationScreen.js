@@ -12,6 +12,8 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { authSignUp } from "../redux/auth/authOperations";
 
 const initialState = {
   login: "",
@@ -19,14 +21,13 @@ const initialState = {
   password: "",
 };
 
-export default function RegisterScreen({navigation}) {
-  console.log(Platform.OS);
+export default function RegisterScreen({ navigation }) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [dimensions, setDimensions] = useState(
     Dimensions.get("window").width - 10 * 2
   );
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const onChange = () => {
       const width = Dimensions.get("window").width - 10 * 2;
@@ -38,15 +39,15 @@ export default function RegisterScreen({navigation}) {
     };
   }, []);
 
-  const keyboardClosed = () => {
+  const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);
+    dispatch(authSignUp(state))
     setState(initialState);
   };
 
   return (
-    <TouchableWithoutFeedback onPress={keyboardClosed}>
+    <TouchableWithoutFeedback onPress={handleSubmit}>
       <View style={styles.container}>
         <ImageBackground
           style={styles.image}
@@ -67,42 +68,50 @@ export default function RegisterScreen({navigation}) {
               <View>
                 <TextInput
                   style={styles.input}
-                  selectionColor={'#FF6C00'}
+                  selectionColor={"#FF6C00"}
                   placeholder="Login"
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.login}
-                  onChangeText={value => setState(prevState => ({...prevState, login: value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, login: value }))
+                  }
                 />
               </View>
               <View>
                 <TextInput
                   style={styles.input}
-                  selectionColor={'#FF6C00'}
+                  selectionColor={"#FF6C00"}
                   placeholder="Your email"
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
-                  onChangeText={value => setState(prevState => ({...prevState, email: value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, email: value }))
+                  }
                 />
               </View>
               <View>
                 <TextInput
                   style={styles.input}
-                  selectionColor={'#FF6C00'}
+                  selectionColor={"#FF6C00"}
                   placeholder="Password"
                   onFocus={() => setIsShowKeyboard(true)}
                   secureTextEntry={true}
                   value={state.password}
-                  onChangeText={value => setState(prevState => ({...prevState, password: value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, password: value }))
+                  }
                 />
               </View>
-              <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={keyboardClosed}
-              >
-                <Text style={styles.btn} onPress={() => navigation.navigate("Post")}>Sign Up</Text>
+              <TouchableOpacity activeOpacity={0.8} onPress={handleSubmit}>
+                <Text
+                  style={styles.btn}
+                  onPress={() => navigation.navigate("Post")}
+                >
+                  Sign Up
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={()=> navigation.navigate('Login')}>
-              <Text style={styles.text}>You have account? Sign in!</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={styles.text}>You have account? Sign in!</Text>
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
