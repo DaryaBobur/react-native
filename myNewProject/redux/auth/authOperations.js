@@ -1,13 +1,15 @@
-import db from '../../firebase/config';
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 export const authSignIn = () => async(dispatch, getState) => {};
 
 export const authSignUp = ({login, email, password, }) => async(dispatch, getState) => {
+    const auth = getAuth();
+
 try {
-    const user = await db.auth().createUserWithEmailAndPassword(email, password);
+    const user = await createUserWithEmailAndPassword(auth, email, password);
     console.log(user)
 } catch (error) {
-    console.log(error.message)
+    console.log(error.code)
+    console.log(error.message)   
 }
 };
 
