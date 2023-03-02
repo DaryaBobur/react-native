@@ -13,19 +13,21 @@ import {
   Dimensions,
 } from "react-native";
 
+import { useDispatch } from "react-redux";
+import { authSignIn } from "../redux/auth/authOperations";
+
 const initialState = {
-  login: "",
   email: "",
   password: "",
 };
 
-export default function LoginScreen({navigation}) {
-  console.log(Platform.OS);
+export default function LoginScreen({ navigation }) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [dimensions, setDimensions] = useState(
     Dimensions.get("window").width - 10 * 2
   );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const onChange = () => {
@@ -38,15 +40,17 @@ export default function LoginScreen({navigation}) {
     };
   }, []);
 
-  const keyboardClosed = () => {
+  const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);
+
+    dispatch(authSignIn(state));
+        console.log(state);
     setState(initialState);
   };
 
   return (
-    <TouchableWithoutFeedback onPress={keyboardClosed}>
+    <TouchableWithoutFeedback onPress={handleSubmit}>
       <View style={styles.container}>
         <ImageBackground
           style={styles.image}
@@ -70,7 +74,9 @@ export default function LoginScreen({navigation}) {
                   placeholder="Your email"
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
-                  onChangeText={value => setState(prevState => ({...prevState, email: value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, email: value }))
+                  }
                 />
               </View>
               <View>
@@ -80,20 +86,22 @@ export default function LoginScreen({navigation}) {
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
                   secureTextEntry={true}
-                  onChangeText={value => setState(prevState => ({...prevState, password: value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, password: value }))
+                  }
                 />
               </View>
-              <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={keyboardClosed}
-              >
-                <Text style={styles.btn} onPress={() => navigation.navigate("Post")}>Log In</Text>
+              <TouchableOpacity activeOpacity={0.8} onPress={handleSubmit}>
+                <Text
+                  style={styles.btn}
+                  // onPress={() => navigation.navigate("Post")}
+                >
+                  Log In
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={()=> navigation.navigate('Register')}>
-              <Text style={styles.text}>Don't have an account? Sign up!</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                <Text style={styles.text}>Don't have an account? Sign up!</Text>
               </TouchableOpacity>
-              
-
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
