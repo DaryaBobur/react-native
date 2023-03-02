@@ -27,7 +27,9 @@ export default function RegisterScreen({ navigation }) {
   const [dimensions, setDimensions] = useState(
     Dimensions.get("window").width - 10 * 2
   );
+
   const dispatch = useDispatch();
+  
   useEffect(() => {
     const onChange = () => {
       const width = Dimensions.get("window").width - 10 * 2;
