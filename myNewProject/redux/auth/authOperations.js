@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../firebase/config";
+
 export const authSignIn =
   ({ email, password }) =>
   async (dispatch, getState) => {
