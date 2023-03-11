@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile 
 } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { authSlice } from "./authReducer";
@@ -28,7 +29,7 @@ export const authSignUp =
         login
       );
       const user = auth.currentUser;
-        await user.updateProfile({
+        await updateProfile(user, {
           displayName: login,
         })
 
