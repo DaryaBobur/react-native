@@ -1,8 +1,9 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile 
+  updateProfile,
 } from "firebase/auth";
+
 import { auth } from "../../firebase/config";
 import { authSlice } from "./authReducer";
 
@@ -22,22 +23,17 @@ export const authSignUp =
   ({ login, email, password }) =>
   async (dispatch, getState) => {
     try {
-       await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-        login
-      );
+      await createUserWithEmailAndPassword(auth, email, password, login);
       const user = auth.currentUser;
-        await updateProfile(user, {
-          displayName: login,
-        })
+      await updateProfile(user, {
+        displayName: login,
+      });
 
-        const {displayName, uid} = user;
+      const { displayName, uid } = user;
 
       const userUpdateProfile = {
-          login: displayName,
-          userId: uid,
+        login: displayName,
+        userId: uid,
       };
 
       dispatch(authSlice.actions.updateUserProfile(userUpdateProfile));
@@ -49,3 +45,8 @@ export const authSignUp =
   };
 
 export const authSignOut = () => async (dispatch, getState) => {};
+
+export const authStateChangeUser = () => async () => {
+  
+
+};
