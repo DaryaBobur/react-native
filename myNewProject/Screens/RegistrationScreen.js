@@ -29,7 +29,7 @@ export default function RegisterScreen({ navigation }) {
   );
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     const onChange = () => {
       const width = Dimensions.get("window").width - 10 * 2;
@@ -44,7 +44,7 @@ export default function RegisterScreen({ navigation }) {
   const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    dispatch(authSignUp(state))
+    dispatch(authSignUp(state));
     setState(initialState);
   };
 
@@ -105,12 +105,7 @@ export default function RegisterScreen({ navigation }) {
                 />
               </View>
               <TouchableOpacity activeOpacity={0.8} onPress={handleSubmit}>
-                <Text
-                  style={styles.btn}
-                  // onPress={() => navigation.navigate("Home")}
-                >
-                  Sign Up
-                </Text>
+                <Text style={styles.btn}>Sign Up</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                 <Text style={styles.text}>You have account? Sign in!</Text>
