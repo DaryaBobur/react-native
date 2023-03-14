@@ -1,11 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { authSignOut } from "../redux/auth/authOperations";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { authSignOut } from "../../redux/auth/authOperations";
 
 const ProfileScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>ProfileScreen</Text>
+    <View>
+      <View style={styles.container}>
+        <Text>ProfileScreen</Text>
+      </View>
+      <TouchableOpacity activeOpacity={0.8}>
+        <Text>Sign Out</Text>
+      </TouchableOpacity>
     </View>
   );
 };
