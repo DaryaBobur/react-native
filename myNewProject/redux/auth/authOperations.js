@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  signOut
 } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
@@ -44,8 +45,6 @@ export const authSignUp =
     }
   };
 
-export const authSignOut = () => async (dispatch, getState) => {};
-
 export const authStateChangeUser = () => async (dispatch, getState) => {
   await onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -57,4 +56,8 @@ export const authStateChangeUser = () => async (dispatch, getState) => {
       dispatch(authSlice.actions.authStateChange({ stateChange: true }));
     }
   });
+};
+
+export const authSignOut = () => async (dispatch, getState) => {
+  await signOut(auth);
 };
