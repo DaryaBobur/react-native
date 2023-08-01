@@ -63,6 +63,7 @@ export default function RegisterScreen({ navigation }) {
               style={{
                 ...styles.form,
                 marginBottom: isShowKeyboard ? 32 : 85,
+                marginTop: isShowKeyboard ? 92 : 100,
                 width: dimensions,
               }}
             >
@@ -136,9 +137,11 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   form: {
+    justifyContent: "flex-end",
     width: "100%",
     backgroundColor: "#fff",
     paddingTop: 92,
+
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
