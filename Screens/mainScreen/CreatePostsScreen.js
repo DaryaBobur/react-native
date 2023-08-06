@@ -14,6 +14,8 @@ import * as Location from "expo-location";
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "../../firebase/config";
 
 const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
@@ -33,16 +35,25 @@ const CreatePostsScreen = ({ navigation }) => {
       setErrorMsg("Permission to access location was denied");
       return;
     }
-    const location = await Location.getCurrentPositionAsync();
-    console.log("latitude", location.coords.latitude);
-    console.log("longitude", location.coords.longitude);
+    await Location.getCurrentPositionAsync();
+
     setPhoto(photo.uri);
-    console.log("photo", photo);
+    console.log("photo", photo.uri);
   };
 
   const sendPhoto = () => {
-    console.log(navigation);
+    uploadPhotoToServer();
     navigation.navigate("Home", { photo });
+  };
+
+  const uploadPhotoToServer = async () => {
+    const response = await fetch(photo);
+    const file = await response.blob();
+    const uniquePostId = Date.now().toString();
+
+    const storageRef = ref(storage, `postImg/${uniquePostId}`);
+    uploadBytes(storageRef, file);
+    console.log("link", storageRef);
   };
 
   return (
