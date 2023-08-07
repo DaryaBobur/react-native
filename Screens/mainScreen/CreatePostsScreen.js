@@ -14,7 +14,7 @@ import * as Location from "expo-location";
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../firebase/config";
 
 const CreatePostsScreen = ({ navigation }) => {
@@ -52,8 +52,9 @@ const CreatePostsScreen = ({ navigation }) => {
     const uniquePostId = Date.now().toString();
 
     const storageRef = ref(storage, `postImg/${uniquePostId}`);
-    uploadBytes(storageRef, file);
-    console.log("link", storageRef);
+    uploadBytes(storageRef, file).then((img) => {
+      getDownloadURL(img.ref).then((url) => console.log(url));
+    });
   };
 
   return (
