@@ -15,20 +15,33 @@ import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../firebase/config";
+import { storage, db } from "../../firebase/config";
 
 const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [comment, setComment] = useState('');
+  const [location, setLocation] = useState(null);
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === "granted");
+      // let { status } = await Location.requestPermissionsAsync();
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
     })();
   }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const { status } = await Camera.requestPermissionsAsync();
+  //     setHasPermission(status === "granted");
+
+  //   })();
+  // }, []);
 
   const takePhoto = async () => {
+    console.log('comment', comment);
+    console.log('location', location);
     const photo = await camera.takePictureAsync();
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
@@ -45,6 +58,10 @@ const CreatePostsScreen = ({ navigation }) => {
     uploadPhotoToServer();
     navigation.navigate("Home", { photo });
   };
+
+  const uploadPostToServer =()=> {
+
+  }
 
   const uploadPhotoToServer = async () => {
     const response = await fetch(photo);
@@ -73,10 +90,10 @@ const CreatePostsScreen = ({ navigation }) => {
         <Text style={styles.text}>Download photo</Text>
       </View>
       <View>
-        <TextInput style={styles.input} placeholder="Description..." />
+        <TextInput style={styles.input} placeholder="Description..." onChangeText={setComment}/>
       </View>
       <View>
-        <TextInput style={styles.input} placeholder="  Location..." />
+        <TextInput style={styles.input} placeholder="  Location..."/>
         <EvilIcons
           name="location"
           size={24}
