@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-
+import { useSelector } from "react-redux";
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
 
@@ -15,33 +15,30 @@ import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
 import { storage, db } from "../../firebase/config";
 
 const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [location, setLocation] = useState(null);
+
+  const { userId, login } = useSelector((state) => state.auth);
 
   useEffect(() => {
     (async () => {
-      // let { status } = await Location.requestPermissionsAsync();
-
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
   }, []);
-  // useEffect(() => {
-  //   (async () => {
-  //     const { status } = await Camera.requestPermissionsAsync();
-  //     setHasPermission(status === "granted");
-
-  //   })();
-  // }, []);
 
   const takePhoto = async () => {
-    console.log('comment', comment);
-    console.log('location', location);
+    console.log("comment", comment);
+    console.log("location", location.coords);
+    console.log(userId);
+    console.log(login);
+
     const photo = await camera.takePictureAsync();
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
@@ -49,19 +46,13 @@ const CreatePostsScreen = ({ navigation }) => {
       return;
     }
     await Location.getCurrentPositionAsync();
-
     setPhoto(photo.uri);
-    console.log("photo", photo.uri);
   };
 
   const sendPhoto = () => {
-    uploadPhotoToServer();
+    uploadPostToServer();
     navigation.navigate("Home", { photo });
   };
-
-  const uploadPostToServer =()=> {
-
-  }
 
   const uploadPhotoToServer = async () => {
     const response = await fetch(photo);
@@ -69,9 +60,24 @@ const CreatePostsScreen = ({ navigation }) => {
     const uniquePostId = Date.now().toString();
 
     const storageRef = ref(storage, `postImg/${uniquePostId}`);
-    uploadBytes(storageRef, file).then((img) => {
-      getDownloadURL(img.ref).then((url) => console.log(url));
+
+    const data = await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(data.ref);
+    console.log(url);
+    return url;
+  };
+
+  const uploadPostToServer = async () => {
+    const photo = await uploadPhotoToServer();
+    console.log("photography", photo);
+    await addDoc(collection(db, "posts"), {
+      photo,
+      comment,
+      location: location.coords,
+      userId,
+      login,
     });
+    
   };
 
   return (
@@ -90,10 +96,14 @@ const CreatePostsScreen = ({ navigation }) => {
         <Text style={styles.text}>Download photo</Text>
       </View>
       <View>
-        <TextInput style={styles.input} placeholder="Description..." onChangeText={setComment}/>
+        <TextInput
+          style={styles.input}
+          placeholder="Description..."
+          onChangeText={setComment}
+        />
       </View>
       <View>
-        <TextInput style={styles.input} placeholder="  Location..."/>
+        <TextInput style={styles.input} placeholder="  Location..." />
         <EvilIcons
           name="location"
           size={24}
