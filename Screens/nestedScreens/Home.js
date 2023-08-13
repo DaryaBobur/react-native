@@ -33,15 +33,17 @@ const Home = ({ route, navigation }) => {
         renderItem={({ item }) => (
           <View style={styles.imageContainer}>
             <Image source={{ uri: item.photo }} style={styles.image} />
+            <View>
+              <TouchableOpacity onPress={() => navigation.navigate("Map", {location: item.location})}>
+                <Feather name="map-pin" size={24} color="#BDBDBD" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("Comments")}>
+                <EvilIcons name="comment" size={24} color="#BDBDBD" />
+              </TouchableOpacity>
+            </View>
           </View>
         )}
       />
-      <TouchableOpacity onPress={() => navigation.navigate("Map")}>
-        <Feather name="map-pin" size={24} color="#BDBDBD" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Comments")}>
-        <EvilIcons name="comment" size={24} color="#BDBDBD" />
-      </TouchableOpacity>
     </View>
   );
 };
