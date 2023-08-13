@@ -6,19 +6,25 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase/config";
+
 import { Feather } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 
 const Home = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
-console.log(route.params)
-  useEffect(() => {
-    if (route.params) {
-      setPosts((prevState) => [...prevState, route.params]);
-    }
-  }, [route.params]);
 
-  
+  const getAllPosts = async () => {
+    await onSnapshot(collection(db, "posts"), (data) =>
+      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    );
+  };
+
+  useEffect(() => {
+    getAllPosts();
+  }, []);
+
   return (
     <View style={styles.container}>
       <FlatList
