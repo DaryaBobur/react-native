@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Text,
 } from "react-native";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/config";
@@ -33,11 +34,16 @@ const Home = ({ route, navigation }) => {
         renderItem={({ item }) => (
           <View style={styles.imageContainer}>
             <Image source={{ uri: item.photo }} style={styles.image} />
+            <Text>{item.description}</Text>
             <View>
-              <TouchableOpacity onPress={() => navigation.navigate("Map", {location: item.location})}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Map", { location: item.location })
+                }
+              >
                 <Feather name="map-pin" size={24} color="#BDBDBD" />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate("Comments")}>
+              <TouchableOpacity onPress={() => navigation.navigate("Comments", {postId: item.id})}>
                 <EvilIcons name="comment" size={24} color="#BDBDBD" />
               </TouchableOpacity>
             </View>
