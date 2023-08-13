@@ -21,20 +21,25 @@ import { storage, db } from "../../firebase/config";
 const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
-  const [comment, setComment] = useState("");
+  const [description, setDescription] = useState("");
   const [location, setLocation] = useState(null);
 
   const { userId, login } = useSelector((state) => state.auth);
 
   useEffect(() => {
     (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
   }, []);
 
   const takePhoto = async () => {
-    console.log("comment", comment);
+    console.log("Description", description);
     console.log("location", location.coords);
     console.log(userId);
     console.log(login);
@@ -51,7 +56,7 @@ const CreatePostsScreen = ({ navigation }) => {
 
   const sendPhoto = () => {
     uploadPostToServer();
-    navigation.navigate("Home", { photo });
+    navigation.navigate("Home");
   };
 
   const uploadPhotoToServer = async () => {
@@ -72,7 +77,7 @@ const CreatePostsScreen = ({ navigation }) => {
     console.log("photography", photo);
     await addDoc(collection(db, "posts"), {
       photo,
-      comment,
+      description,
       location: location.coords,
       userId,
       login,
@@ -99,7 +104,7 @@ const CreatePostsScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Description..."
-          onChangeText={setComment}
+          onChangeText={setDescription}
         />
       </View>
       <View>
