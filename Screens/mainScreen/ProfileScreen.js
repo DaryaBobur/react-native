@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { authSignOut } from "../../redux/auth/authOperations";
 import { useDispatch } from "react-redux";
 
 const ProfileScreen = () => {
+useEffect(()=> {
+
+}, [])
+
+
   const dispatch = useDispatch();
 
   const signOut = () => {
